@@ -1,0 +1,43 @@
+
+  <div class="container">
+    <div class="row">
+      <div class="col order-last">
+        
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            <h5>Lütfen Oturum Açın</h5>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>E-Posta Adresi</label>
+              <input type="text" name="mail" #mail class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Parola</label>
+              <input type="password" name="parola" #parola class="form-control">
+            </div>
+          </div>
+          <div class="card-footer" >
+            <div class="row justify-content-around">
+              <div class="col">
+                <button class="btn btn-danger btn-outline-info  " (click)="GirisYap(mail.value,parola.value)">Yönetici Giriş</button>
+              </div>
+              <div class="col">
+                <button class="btn btn-primary btn-outline-dark" (click)="DaireSahibiGiris(mail.value,parola.value)">Daire Sahibi Girişi</button>
+              </div>
+            </div>
+            
+            &nbsp; &nbsp; 
+            
+          </div>
+        </div>
+        <div [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'" *ngIf="sonuc.mesaj?.length>0">
+          {{sonuc.mesaj}}</div>
+      </div>
+      <div class="col order-first">
+        
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid mt-3">  
+  <div class="bg bg-light d-flex justify-content-end ">
+    <button class="btn btn-outline-danger btn-sm ml-2" (click)="OturumuKapat()">Oturumu Kapat</button>
+  </div>  
+
+  <div class="col-md-4">
+    <div class="row alert alert-danger" *ngIf="silme2">
+      <div class="col-md-12">
+        <p> <b>{{secYonetici.YoneticiAdi}}</b> İsimli Görevli Silinecek...</p>
+        <button class="btn btn-outline-danger btn-sm" (click)="Sil2()">Evet</button>
+        <button class="btn btn-outline-primary btn-sm ml-2" (click)="silme2=false;">Hayır</button>
+      </div>
+    </div>
+    <div class="row alert alert-secondary" *ngIf="detay2">
+      <div class="col-md-6">
+        <h5>Görevli Adı</h5>
+        <p>{{secYonetici.YoneticiAdi}}</p>
+        <h5>Sitesi</h5>
+        <p>{{secYonetici.Sitesi}}</p>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-outline-danger btn-sm ml-2" (click)="detay2=false;">Kapat</button>
+      </div>
+    </div>
+    <div class="row" *ngIf="ekleduzenle2">
+      <div class="col-md-12 alert alert-secondary">
+        <h4>Yönetici Ekle - Düzenle</h4>
+        <form #frm="ngForm" (submit)="Kaydet2()">
+          <div class="form-group">
+            <label>Görevli Adı</label>
+            <input type="text" class="form-control" name="görevliAdi" [(ngModel)]="secYonetici.YoneticiAdi">
+          </div>
+          <div class="form-group">
+            <label>Sitesi</label>
+            <input class="form-control" name="sitesi" [(ngModel)]="secYonetici.Sitesi">
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Ekle" class="btn btn-outline-success btn-sm">
+            <button class="btn btn-outline-danger btn-sm ml-2" (click)="ekleduzenle2=false;">Kapat</button>
+          </div>
+        </form>
+        <div [ngClass]="sonuc2.islem2 ? 'alert alert-success':'alert alert-danger'" *ngIf="sonuc2.mesaj2?.length>0">
+          {{sonuc2.mesaj2}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Yöneticiler</h4>
+        <button class="btn btn-outline-info btn-sm" (click)="ekleduzenle2=true;">Yonetici Ekle</button>
+        <table class="table mt-2">
+          <thead>
+            <td>Görevli Adı</td>
+            <td>Durumu</td>
+            <td>İşlem</td>
+            <td>Detay</td>
+            <td>Düzenle</td>              
+            <td>Sil</td>
+          </thead>
+          <tbody>
+            <tr *ngFor="let yonetici  of yoneticiler">
+              <td>{{yonetici.YoneticiAdi}}</td>
+              <td>
+                <span class="badge badge-pill bg-success text-white" *ngIf="yonetici.islem2">İzinde</span>
+                <span class="badge badge-pill bg-danger text-white" *ngIf="!yonetici.islem2">Çalışıyor</span>
+              </td>
+              <td>
+                <button class="btn btn-outline-success btn-sm" (click)="TamamlaIptal2(yonetici,true)"
+                  *ngIf="!yonetici.islem2">İzinli</button>
+                <button class="btn btn-outline-danger btn-sm" (click)="TamamlaIptal2(yonetici,false)"
+                  *ngIf="yonetici.islem2">İş başında</button>
+              </td>
+              <td><button class="btn btn-outline-info btn-sm" (click)="YoneticiSec(yonetici);detay2=true;">Detay</button>
+              </td>
+              <td><button class="btn btn-outline-warning btn-sm"
+                (click)="YoneticiSec(yonetici);ekleduzenle2=true;">Düzenle</button></td>
+              <td><button class="btn btn-outline-danger btn-sm" (click)="YoneticiSec(yonetici);silme2=true;">Sil</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,84 @@
+
+<app-navbar></app-navbar>
+
+<div class="container-fluid mt-3">  
+  <div class="bg bg-light d-flex justify-content-end ">
+    <button class="btn btn-outline-danger btn-sm ml-2" (click)="OturumuKapat()">Oturumu Kapat</button>
+  </div>  
+
+  <div class="col-md-4">
+    <div class="row alert alert-danger" *ngIf="silme3">
+      <div class="col-md-12">
+        <p> <b>{{secAidat.siteAdi}}</b> Aidatlar Silinecek...</p>
+        <button class="btn btn-outline-danger btn-sm" (click)="Sil3()">Evet</button>
+        <button class="btn btn-outline-primary btn-sm ml-2" (click)="silme3=false;">Hayır</button>
+      </div>
+    </div>
+    <div class="row alert alert-secondary" *ngIf="detay3">
+      <div class="col-md-6">
+        <h5>Site Adı</h5>
+        <p>{{secAidat.siteAdi}}</p>
+        <h5>Daire Sayısı</h5>
+        <p>{{secAidat.daireSayisi}}</p>
+      </div>
+      <div class="col-md-6">
+        <h5>Aidat Ücreti</h5>
+        <p>{{secAidat.aidat}}</p>
+        <button class="btn btn-outline-danger btn-sm" (click)="detay3=false;">Kapat</button>
+      </div>
+    </div>
+    <div class="row" *ngIf="ekleduzenle3">
+      <div class="col-md-12 alert alert-secondary">
+        <h4>Aidat Ekle - Düzenle</h4>
+        <form #frm="ngForm" (submit)="Kaydet3()">
+          <div class="form-group">
+            <label>Site Adı</label>
+            <input type="text" class="form-control" name="siteAdi" [(ngModel)]="secAidat.siteAdi">
+          </div>
+          <div class="form-group">
+            <label>Daire Sayısı</label>
+            <input class="form-control" name="daireSayisi" [(ngModel)]="secAidat.daireSayisi">
+          </div>
+          <div class="form-group">
+            <label>Aidat Ücreti</label>
+            <input class="form-control" name="aidatUcreti" [(ngModel)]="secAidat.aidat">
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Kaydet" class="btn btn-outline-success btn-sm">
+            <button class="btn btn-outline-danger btn-sm ml-2" (click)="ekleduzenle3=false;">Kapat</button>
+          </div>
+        </form>
+        <div [ngClass]="sonuc3.islem3 ? 'alert alert-success':'alert alert-danger'" *ngIf="sonuc3.mesaj3?.length>0">
+          {{sonuc3.mesaj3}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Aidatlar</h4>
+        <button class="btn btn-outline-info btn-sm" (click)="ekleduzenle3=true;">Aidat Ekle</button>
+        <table class="table mt-2">
+          <thead>
+            <td>Site Adı</td>
+            <td>Aidat</td>
+            <td>Detay</td>
+            <td>Düzenle</td>
+            <td>Sil</td>
+          </thead>
+          <tbody>
+            <tr *ngFor="let aidat of aidatlar">
+              <td>{{aidat.siteAdi}}</td>
+              <td>{{aidat.aidat}}</td>
+              <td><button class="btn btn-outline-info btn-sm"
+                  (click)="AidatSec(aidat);detay3=true;">Detay</button>
+              </td>
+              <td><button class="btn btn-outline-warning btn-sm"
+                (click)="AidatSec(aidat);ekleduzenle3=true;">Düzenle</button></td>
+              <td><button class="btn btn-outline-danger btn-sm"
+                  (click)="AidatSec(aidat);silme3=true;">Sil</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

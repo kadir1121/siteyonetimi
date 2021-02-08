@@ -1,0 +1,148 @@
+
+
+<div class="container-fluid mt-3">  
+  <div class="bg bg-light d-flex justify-content-end ">
+    <button class="btn btn-outline-danger btn-sm ml-2" (click)="OturumuKapat()">Oturumu Kapat</button>
+  </div>  
+  
+  <div class="row bg bg-light">
+    <div class="col-md-4">      
+      <div class="row alert alert-secondary" *ngIf="detay">
+        <div class="col-md-6">
+          <h5>Daire Numarası</h5>
+          <p>{{secDaire.daireNumarasi}}</p>
+          <h5>Daire Sahibi Adı Soyadı</h5>
+          <p>{{secDaire.dAdSoyad}}</p>
+        </div>
+        <div class="col-md-6">          
+          <h5>Durumu</h5>
+          <p><span class="badge badge-pill bg-success text-white" *ngIf="secDaire.islem">Dolu</span>
+            <span class="badge badge-pill bg-danger text-white" *ngIf="!secDaire.islem">Satılık-Kiralık</span>
+          </p>
+          <h5>Sitesi</h5>
+          <p>{{secDaire.sitesi}}</p>
+          <button class="btn btn-outline-danger btn-sm" (click)="detay=false;">Kapat</button>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Daireler</h4>                   
+          <table class="table mt-2">
+            <thead>
+              <td>Daire Numarası</td>
+              <td>Daire Sahibi</td>              
+              <td>Detay</td>              
+            </thead>
+            <tbody>
+              <tr *ngFor="let daire  of daireler">
+                <td>{{daire.daireNumarasi}}</td>
+                <td>
+                  {{daire.dAdSoyad}}
+                </td>                
+                <td><button class="btn btn-outline-info btn-sm" (click)="DaireSec(daire);detay=true;">Detay</button>
+                </td>               
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="row alert alert-danger" *ngIf="silme2">
+        <div class="col-md-12">
+          <p> <b>{{secYonetici.YoneticiAdi}}</b> İsimli Görevli Silinecek...</p>
+          <button class="btn btn-outline-danger btn-sm" (click)="Sil2()">Evet</button>
+          <button class="btn btn-outline-primary btn-sm ml-2" (click)="silme2=false;">Hayır</button>
+        </div>
+      </div>
+      <div class="row alert alert-secondary" *ngIf="detay2">
+        <div class="col-md-6">
+          <h5>Görevli Adı</h5>
+          <p>{{secYonetici.YoneticiAdi}}</p>
+          <h5>Sitesi</h5>
+          <p>{{secYonetici.Sitesi}}</p>          
+        </div>
+        <div class="col-md-6">          
+          <button class="btn btn-outline-danger btn-sm" (click)="detay2=false;">Kapat</button>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Yöneticiler</h4>          
+          <table class="table mt-2">
+            <thead>
+              <td>Görevli Adı</td>
+              <td>Sitesi</td>              
+              <td>Detay</td>              
+            </thead>
+            <tbody>
+              <tr *ngFor="let yonetici  of yoneticiler">
+                <td>{{yonetici.YoneticiAdi}}</td>
+                <td>{{yonetici.Sitesi}}</td>       
+                
+                
+                <td><button class="btn btn-outline-info btn-sm" (click)="YoneticiSec(yonetici);detay2=true;">Detay</button>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="col-md-4">
+      <div class="row alert alert-danger" *ngIf="silme3">
+        <div class="col-md-12">
+          <p> <b>{{secAidat.siteAdi}}</b> Aidatlar Silinecek...</p>
+          <button class="btn btn-outline-danger btn-sm" (click)="Sil3()">Evet</button>
+          <button class="btn btn-outline-primary btn-sm ml-2" (click)="silme3=false;">Hayır</button>
+        </div>
+      </div>
+      <div class="row alert alert-secondary" *ngIf="detay3">
+        <div class="col-md-6">
+          <h5>Site Adı</h5>
+          <p>{{secAidat.siteAdi}}</p>
+          <h5>Daire Sayısı</h5>
+          <p>{{secAidat.daireSayisi}}</p>
+        </div>
+        <div class="col-md-6">
+          <h5>Aidat Ücreti</h5>
+          <p>{{secAidat.aidat}}</p>
+          <button class="btn btn-outline-danger btn-sm" (click)="detay3=false;">Kapat</button>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Aidatlar</h4>
+          
+          <table class="table mt-2">
+            <thead>
+              <td>Site Adı</td>
+              <td>Aidat</td>    
+              <td>Detay</td>           
+            </thead>
+            <tbody>
+              <tr *ngFor="let aidat of aidatlar">
+                <td>{{aidat.siteAdi}}</td>
+                <td>{{aidat.aidat}}</td>
+                <td><button class="btn btn-outline-info btn-sm"
+                    (click)="AidatSec(aidat);detay3=true;">Detay</button>
+                </td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

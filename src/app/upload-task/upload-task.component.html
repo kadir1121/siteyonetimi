@@ -1,0 +1,21 @@
+<div *ngIf="percentage | async as pct">
+    <progress [value]="pct" max="100"></progress>
+    {{ pct | number }}%
+  </div>
+  
+  
+  
+  <div *ngIf="snapshot | async as snap">
+  
+    {{ snap.bytesTransferred }} of {{ snap.totalBytes }} 
+  
+    <div *ngIf="downloadURL as url">
+      <h3>Yüklenen Dosya ↓</h3>
+      <img class="dropzone" [src]="url"><br>
+      <a [href]="url" target="_blank" rel="noopener">İndir</a>
+    </div> 
+  
+    <button class="btn btn-warning" (click)="task.pause()" [disabled]="!isActive(snap)">Durdur</button> &nbsp;
+    <button class="btn btn-danger" (click)="task.cancel()" [disabled]="!isActive(snap)">İptal Et</button> &nbsp;
+    <button class="btn btn-primary" (click)="task.resume()" [disabled]="!(snap?.state === 'paused')">Devam Et</button>
+  </div>
